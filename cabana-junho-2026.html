@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cabana · Ações Junho 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fogo: #C94A1A;
+    --ambar: #D4821A;
+    --ouro: #E8B84B;
+    --creme: #F5ECD7;
+    --escuro: #1A0E05;
+    --madeira: #3D1F0A;
+    --terracota: #8B3A1A;
+    --rosa: #C4607A;
+    --verde-sj: #4A7C2F;
+    --palha: #F0D9A0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+  body {
+    background: var(--escuro);
+    color: var(--creme);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .nav-dots {
+    position: fixed; right: 18px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 10px; z-index: 100;
+  }
+  .nav-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(245,236,215,0.2); border: none; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-dot.active { background: var(--ouro); transform: scale(1.6); }
+
+  /* SECTIONS */
+  section {
+    min-height: 100vh; padding: 60px 48px;
+    display: flex; flex-direction: column; justify-content: center;
+    scroll-snap-align: start; position: relative; overflow: hidden;
+  }
+
+  /* FADE */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up.d1 { transition-delay: 0.1s; }
+  .fade-up.d2 { transition-delay: 0.2s; }
+  .fade-up.d3 { transition-delay: 0.3s; }
+
+  /* LUZES DECORATIVAS */
+  .lights {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 60px; pointer-events: none; z-index: 1;
+  }
+  .lights::before {
+    content: '';
+    position: absolute; top: 0; left: -5%; right: -5%;
+    height: 2px;
+    background: linear-gradient(90deg,
+      transparent 0%, var(--ouro) 8%, transparent 12%,
+      var(--ambar) 18%, transparent 22%,
+      var(--ouro) 28%, transparent 32%,
+      var(--fogo) 38%, transparent 42%,
+      var(--ouro) 48%, transparent 52%,
+      var(--ambar) 58%, transparent 62%,
+      var(--ouro) 68%, transparent 72%,
+      var(--fogo) 78%, transparent 82%,
+      var(--ouro) 88%, transparent 92%,
+      var(--ambar) 98%, transparent 100%
+    );
+  }
+
+  /* TEXTURA GRAIN */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 200;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .section-eyebrow {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    opacity: 0.4; margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 8vw, 88px);
+    line-height: 0.95; letter-spacing: -1px;
+    margin-bottom: 36px;
+  }
+
+  /* ═══ CAPA ═══ */
+  #capa {
+    background: var(--escuro);
+    background-image:
+      radial-gradient(ellipse 80% 70% at 60% 40%, rgba(201,74,26,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212,130,26,0.12) 0%, transparent 60%);
+  }
+
+  .capa-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; letter-spacing: 8px; text-transform: uppercase;
+    color: var(--ouro); opacity: 0.7; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .capa-logo::before, .capa-logo::after {
+    content: ''; flex: 1; max-width: 40px; height: 1px;
+    background: var(--ouro); opacity: 0.4;
+  }
+
+  .capa-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 16vw, 160px);
+    line-height: 0.85; letter-spacing: -3px;
+    margin-bottom: 8px;
+  }
+  .capa-title .linha1 { color: var(--creme); display: block; }
+  .capa-title .linha2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ambar);
+    display: block; font-style: italic;
+  }
+
+  .capa-sub {
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--ouro); opacity: 0.6; margin-bottom: 40px;
+    padding-left: 4px;
+  }
+
+  .capa-badges {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px;
+  }
+  .badge {
+    border-radius: 4px; padding: 7px 16px;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .badge.amor { background: rgba(196,96,122,0.15); border: 1px solid rgba(196,96,122,0.4); color: #E08090; }
+  .badge.sj { background: rgba(74,124,47,0.15); border: 1px solid rgba(74,124,47,0.4); color: #80B860; }
+  .badge.copa { background: rgba(232,184,75,0.12); border: 1px solid rgba(232,184,75,0.35); color: var(--ouro); }
+
+  .scroll-hint {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    opacity: 0.25; animation: blink 2.5s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
+
+  /* ═══ CALENDÁRIO ═══ */
+  #calendario { background: #130800; }
+
+  .timeline {
+    display: flex; flex-direction: column; gap: 0;
+    max-width: 640px; margin-top: 8px;
+    position: relative;
+  }
+  .timeline::before { display: none; }
+
+  .tl-item {
+    display: flex; gap: 24px; align-items: flex-start;
+    padding: 20px 0;
+  }
+
+  .tl-date {
+    min-width: 96px; text-align: center; flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .tl-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px; font-weight: 700; line-height: 1;
+    color: var(--ouro);
+  }
+  .tl-month {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.4; margin-top: 2px;
+  }
+
+  .tl-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 14px;
+    box-shadow: 0 0 0 3px rgba(212,130,26,0.2);
+  }
+
+  .tl-content { padding-top: 8px; }
+  .tl-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 5px;
+  }
+  .tl-content p { font-size: 12px; opacity: 0.5; line-height: 1.7; }
+
+  /* ═══ DIA DOS NAMORADOS ═══ */
+  #namorados {
+    background: #140008;
+    background-image: radial-gradient(ellipse 60% 70% at 25% 50%, rgba(196,96,122,0.18) 0%, transparent 65%);
+  }
+
+  .data-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid; border-radius: 4px;
+    padding: 6px 14px; font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .data-tag.amor { border-color: rgba(196,96,122,0.5); color: #E08090; }
+  .data-tag.sj { border-color: rgba(74,124,47,0.5); color: #90C870; }
+  .data-tag.copa { border-color: rgba(232,184,75,0.4); color: var(--ouro); }
+
+  .combos-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; max-width: 800px; margin-bottom: 28px;
+  }
+
+  .combo-card {
+    border-radius: 12px; padding: 26px 22px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .combo-card:hover { transform: translateY(-4px); }
+
+  .combo-card.c1 {
+    background: linear-gradient(160deg, rgba(212,130,26,0.1), rgba(201,74,26,0.06));
+    border: 1px solid rgba(212,130,26,0.25);
+  }
+  .combo-card.c2 {
+    background: linear-gradient(160deg, rgba(196,96,122,0.12), rgba(212,130,26,0.06));
+    border: 1px solid rgba(196,96,122,0.3);
+  }
+  .combo-card.c3 {
+    background: linear-gradient(160deg, rgba(196,96,122,0.18), rgba(139,58,26,0.1));
+    border: 1px solid rgba(196,96,122,0.45);
+  }
+
+  .combo-nivel {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    opacity: 0.4; margin-bottom: 8px;
+  }
+  .combo-nome {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-style: italic; margin-bottom: 16px;
+  }
+  .combo-itens { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .combo-itens li {
+    font-size: 12px; opacity: 0.7; padding-left: 14px; position: relative; line-height: 1.5;
+  }
+  .combo-itens li::before { content: '·'; position: absolute; left: 2px; opacity: 0.5; }
+
+  .combo-preco {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid rgba(245,236,215,0.08);
+    font-size: 11px; opacity: 0.4; letter-spacing: 1px;
+  }
+  .combo-preco strong { color: var(--ouro); opacity: 1; font-size: 14px; }
+
+  .namorados-extra {
+    display: flex; gap: 14px; max-width: 800px; flex-wrap: wrap;
+  }
+  .extra-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; gap: 12px; align-items: center;
+    font-size: 13px;
+  }
+  .extra-card .icon { font-size: 22px; }
+
+  /* ═══ SÃO JOÃO ═══ */
+  #saojao {
+    background: #060D02;
+    background-image:
+      radial-gradient(ellipse 50% 60% at 70% 40%, rgba(74,124,47,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(212,130,26,0.12) 0%, transparent 55%);
+  }
+
+  .sj-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; max-width: 760px;
+  }
+
+  .sj-card {
+    border-radius: 12px; padding: 24px 22px;
+    transition: transform 0.3s;
+  }
+  .sj-card:hover { transform: translateY(-3px); }
+
+  .sj-card.destaque {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(212,130,26,0.15), rgba(201,74,26,0.1));
+    border: 1px solid rgba(212,130,26,0.35);
+    display: flex; gap: 20px; align-items: center;
+  }
+  .sj-card.normal {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  }
+  .sj-card.verde {
+    background: rgba(74,124,47,0.1); border: 1px solid rgba(74,124,47,0.25);
+  }
+
+  .sj-icon { font-size: 36px; flex-shrink: 0; }
+  .sj-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; margin-bottom: 8px;
+  }
+  .sj-card p { font-size: 12px; opacity: 0.6; line-height: 1.65; }
+  .sj-card .tag-brinde {
+    display: inline-block; margin-top: 10px;
+    background: rgba(232,184,75,0.15); border: 1px solid rgba(232,184,75,0.3);
+    border-radius: 4px; padding: 4px 12px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--ouro);
+  }
+
+  /* ═══ COPA ═══ */
+  #copa {
+    background: #030A00;
+    background-image:
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(232,184,75,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 10% 70%, rgba(201,74,26,0.1) 0%, transparent 55%);
+  }
+
+  .copa-acoes {
+    display: flex; flex-direction: column; gap: 14px; max-width: 760px;
+  }
+
+  .copa-card {
+    border-radius: 12px; padding: 24px 26px;
+    display: grid; grid-template-columns: 56px 1fr auto;
+    gap: 18px; align-items: center;
+    transition: transform 0.3s;
+  }
+  .copa-card:hover { transform: translateX(4px); }
+
+  .copa-card.desafio-gol {
+    background: linear-gradient(135deg, rgba(212,130,26,0.12), rgba(201,74,26,0.08));
+    border: 1px solid rgba(212,130,26,0.3);
+  }
+  .copa-card.desafio-cab {
+    background: linear-gradient(135deg, rgba(232,184,75,0.12), rgba(212,130,26,0.08));
+    border: 1px solid rgba(232,184,75,0.35);
+  }
+  .copa-card.figurinhas {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .copa-card.clube {
+    background: linear-gradient(135deg, rgba(201,74,26,0.12), rgba(139,58,26,0.08));
+    border: 1px solid rgba(201,74,26,0.3);
+  }
+
+  .copa-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px; font-weight: 900; line-height: 1;
+    color: var(--ouro); opacity: 0.25;
+  }
+
+  .copa-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; margin-bottom: 6px;
+  }
+  .copa-body p { font-size: 12px; opacity: 0.6; line-height: 1.65; }
+
+  .copa-premio {
+    text-align: right; flex-shrink: 0; min-width: 90px;
+  }
+  .copa-premio .premio-label {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0.35; margin-bottom: 4px; display: block;
+  }
+  .copa-premio .premio-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px; font-style: italic;
+    color: var(--ouro);
+  }
+
+  /* CLUBE CARD — ESPECIAL */
+  .clube-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-top: 10px;
+  }
+  .clube-step {
+    background: rgba(255,255,255,0.04); border-radius: 8px;
+    padding: 12px; text-align: center;
+  }
+  .clube-step .step-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: var(--ouro); line-height: 1;
+  }
+  .clube-step .step-txt { font-size: 10px; opacity: 0.5; margin-top: 4px; line-height: 1.4; }
+
+  /* ═══ RESUMO ═══ */
+  #resumo { background: #0E0600; }
+
+  .resumo-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px; max-width: 860px;
+  }
+
+  .resumo-col {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 22px 20px;
+  }
+  .resumo-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .resumo-col h4.amor { color: #E08090; }
+  .resumo-col h4.sj { color: #90C870; }
+  .resumo-col h4.copa { color: var(--ouro); }
+
+  .resumo-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .resumo-col ul li {
+    font-size: 11px; opacity: 0.6; padding-left: 12px;
+    position: relative; line-height: 1.5;
+  }
+  .resumo-col ul li::before { content: '—'; position: absolute; left: 0; opacity: 0.3; }
+
+  .proximos {
+    margin-top: 20px; max-width: 860px;
+    background: rgba(201,74,26,0.06); border: 1px solid rgba(201,74,26,0.2);
+    border-radius: 12px; padding: 20px 24px;
+  }
+  .proximos h4 {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--fogo); margin-bottom: 12px;
+  }
+  .proximos ul {
+    display: flex; flex-wrap: wrap; gap: 8px; list-style: none;
+  }
+  .proximos ul li {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px; padding: 6px 14px;
+    font-size: 11px; opacity: 0.7;
+  }
+
+  .scroll-down {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.15; animation: blink 2.5s infinite;
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 48px 22px; }
+    .combos-grid, .sj-grid, .resumo-grid { grid-template-columns: 1fr; }
+    .sj-card.destaque { grid-column: span 1; }
+    .copa-card { grid-template-columns: 1fr; }
+    .copa-premio { text-align: left; }
+    .capa-title { font-size: 72px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-dots">
+  <button class="nav-dot active" onclick="scrollTo('#capa')"></button>
+  <button class="nav-dot" onclick="scrollTo('#calendario')"></button>
+  <button class="nav-dot" onclick="scrollTo('#namorados')"></button>
+  <button class="nav-dot" onclick="scrollTo('#saojao')"></button>
+  <button class="nav-dot" onclick="scrollTo('#copa')"></button>
+  <button class="nav-dot" onclick="scrollTo('#resumo')"></button>
+  <button class="nav-dot" onclick="scrollTo('#editorial')"></button>
+</nav>
+
+<!-- ═══ CAPA ═══ -->
+<section id="capa">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <div class="capa-logo">Cabana · Carnes & Pizzas</div>
+    <h1 class="capa-title">
+      <span class="linha1">Junho</span>
+      <span class="linha2">2026</span>
+    </h1>
+    <p class="capa-sub">Planejamento de Ações · Grupo Hot</p>
+    <div class="capa-badges">
+      <span class="badge amor">💕 Dia dos Namorados</span>
+      <span class="badge sj">🎉 São João</span>
+      <span class="badge copa">⚽ Copa do Mundo</span>
+    </div>
+    <p class="scroll-hint">↓ role para explorar</p>
+  </div>
+</section>
+
+<!-- ═══ CALENDÁRIO ═══ -->
+<section id="calendario">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <div class="section-eyebrow">Visão Geral · Junho 2026</div>
+    <h2 class="section-title">Calendário<br><em>de Ações</em></h2>
+
+    <div class="timeline">
+      <div class="tl-item fade-up d1">
+        <div class="tl-date">
+          <div class="tl-day">11</div>
+          <div class="tl-month">jun</div>
+        </div>
+        <div class="tl-dot" style="background:var(--ouro)"></div>
+        <div class="tl-content">
+          <h3 style="color:var(--ouro)">⚽ Abertura da Copa</h3>
+          <p>Início das ações de Copa — desafios, troca de figurinhas e clube de fidelidade a partir deste dia.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up d1">
+        <div class="tl-date">
+          <div class="tl-day">12</div>
+          <div class="tl-month">jun</div>
+        </div>
+        <div class="tl-dot" style="background:var(--rosa)"></div>
+        <div class="tl-content">
+          <h3 style="color:#E08090">💕 Dia dos Namorados</h3>
+          <p>Reserva de mesas limitadas com combos românticos em 3 níveis. Música ao vivo.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up d2">
+        <div class="tl-date">
+          <div class="tl-day">13</div>
+          <div class="tl-month">jun</div>
+        </div>
+        <div class="tl-dot" style="background:var(--ouro)"></div>
+        <div class="tl-content">
+          <h3 style="color:var(--ouro)">⚽ 1º Jogo do Brasil</h3>
+          <p>Desafios ativos, mesa de figurinhas pré-jogo, 1º carimbo do clube de fidelidade.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up d2">
+        <div class="tl-date">
+          <div class="tl-day">19</div>
+          <div class="tl-month">jun</div>
+        </div>
+        <div class="tl-dot" style="background:var(--ouro)"></div>
+        <div class="tl-content">
+          <h3 style="color:var(--ouro)">⚽ 2º Jogo do Brasil</h3>
+          <p>2º carimbo do clube. Desafios e figurinhas continuam.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up d3">
+        <div class="tl-date">
+          <div class="tl-day">24</div>
+          <div class="tl-month">jun</div>
+        </div>
+        <div class="tl-dot" style="background:#90C870"></div>
+        <div class="tl-content">
+          <h3 style="color:#90C870">🎉 São João + 3º Jogo</h3>
+          <p>Grande noite junina com decoração, música, drink de milho, cocada e painel de fotos. Jogo do Brasil rolando junto — 3º carimbo do clube!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-down">↓</div>
+</section>
+
+<!-- ═══ DIA DOS NAMORADOS ═══ -->
+<section id="namorados">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <span class="data-tag amor">💕 12 de Junho · Quinta-feira</span>
+    <h2 class="section-title" style="color:#E08090">Dia dos<br><em>Namorados</em></h2>
+
+    <div class="combos-grid">
+
+      <div class="combo-card c1 fade-up d1">
+        <div class="combo-nivel">Nível 1 · Essencial</div>
+        <div class="combo-nome">Chama do Amor</div>
+        <ul class="combo-itens">
+          <li>2 velas decorativas na mesa</li>
+          <li>Petit gateau do Cabana</li>
+          <li>Ambiente romântico garantido</li>
+        </ul>
+        <div class="combo-preco">
+          Investimento: <strong>~R$ 22–25</strong><br>
+          <span style="font-size:10px; opacity:0.4">(velas R$ ~0,84 un + petit gateau ~R$ 20)</span>
+        </div>
+      </div>
+
+      <div class="combo-card c2 fade-up d2">
+        <div class="combo-nivel">Nível 2 · Romântico</div>
+        <div class="combo-nome">Noite Especial</div>
+        <ul class="combo-itens">
+          <li>3 velas decorativas na mesa</li>
+          <li>Rosa simples ou flor única</li>
+          <li>Petit gateau do Cabana</li>
+          <li>Pratinho coração de chocolate</li>
+        </ul>
+        <div class="combo-preco">
+          Investimento: <strong>~R$ 45–55</strong><br>
+          <span style="font-size:10px; opacity:0.4">(velas + flor + petit gateau + pratinho ~R$ 21)</span>
+        </div>
+      </div>
+
+      <div class="combo-card c3 fade-up d3">
+        <div class="combo-nivel">Nível 3 · Premium</div>
+        <div class="combo-nome">Bela & a Fera</div>
+        <ul class="combo-itens">
+          <li>3 velas decorativas na mesa</li>
+          <li>Rosa encantada (Bela e a Fera) — R$ 25</li>
+          <li>Petit gateau do Cabana</li>
+          <li>Pratinho coração de chocolate</li>
+          <li>Experiência inesquecível 🌹</li>
+        </ul>
+        <div class="combo-preco">
+          Investimento: <strong>~R$ 70–80</strong><br>
+          <span style="font-size:10px; opacity:0.4">(rosa R$ 25 + petit gateau + pratinho + 3 velas)</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="namorados-extra fade-up d2">
+      <div class="extra-card">
+        <span class="icon">🎵</span>
+        <span>Música ao vivo romântica durante a noite</span>
+      </div>
+      <div class="extra-card">
+        <span class="icon">🪑</span>
+        <span>Mesas <strong style="color:var(--ouro)">limitadas</strong> — reserva antecipada obrigatória</span>
+      </div>
+      <div class="extra-card">
+        <span class="icon">📱</span>
+        <span>Divulgação a partir de <strong style="color:var(--ouro)">01/06</strong></span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-down">↓</div>
+</section>
+
+<!-- ═══ SÃO JOÃO ═══ -->
+<section id="saojao">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <span class="data-tag sj">🎉 24 de Junho · Terça-feira</span>
+    <h2 class="section-title" style="color:#90C870">São<br><em>João</em></h2>
+
+    <div class="sj-grid">
+
+      <div class="sj-card destaque fade-up d1">
+        <div class="sj-icon">🌽</div>
+        <div>
+          <h4>Drink de Milho</h4>
+          <p>Brinde especial da casa servido a cada R$ 200 em consumo na noite do São João. Produto diferenciado que marca a data e incentiva o ticket médio.</p>
+          <span class="tag-brinde">🎁 Brinde a cada R$ 200</span>
+        </div>
+      </div>
+
+      <div class="sj-card normal fade-up d1">
+        <div style="font-size:28px; margin-bottom:10px">🎵</div>
+        <h4>Música ao Vivo</h4>
+        <p>Show ao vivo com clima junino — forró, música brasileira, o Cabana Music na versão São João.</p>
+      </div>
+
+      <div class="sj-card normal fade-up d2">
+        <div style="font-size:28px; margin-bottom:10px">🎨</div>
+        <h4>Pintura p/ Crianças</h4>
+        <p>Espaço com atividade de pintura para as crianças durante o evento. Família toda no Cabana!</p>
+      </div>
+
+      <div class="sj-card verde fade-up d1">
+        <div style="font-size:28px; margin-bottom:10px">🥥</div>
+        <h4>Sobremesa Típica</h4>
+        <p>Cocada como sobremesa especial da noite — produto sazonal que reforça a identidade da festa junina.</p>
+      </div>
+
+      <div class="sj-card verde fade-up d2">
+        <div style="font-size:28px; margin-bottom:10px">📸</div>
+        <h4>Painel de Fotos</h4>
+        <p>Painel decorado com adereços juninos — chapéus, tiaras, bandeirinhas. Conteúdo orgânico garantido nas redes sociais.</p>
+      </div>
+
+      <div class="sj-card normal fade-up d3">
+        <div style="font-size:28px; margin-bottom:10px">🎪</div>
+        <h4>Decoração</h4>
+        <p>Ambiente totalmente decorado com a temática junina — bandeirinhas, balões, iluminação especial.</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="scroll-down">↓</div>
+</section>
+
+<!-- ═══ COPA ═══ -->
+<section id="copa">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <span class="data-tag copa">⚽ A partir de 11/06 · Jogos do Brasil: 13 · 19 · 24</span>
+    <h2 class="section-title" style="color:var(--ouro)">Copa do<br><em>Mundo</em></h2>
+
+    <div class="copa-acoes">
+
+      <div class="copa-card desafio-gol fade-up d1">
+        <div class="copa-num">01</div>
+        <div class="copa-body">
+          <h4>⚽ Desafio do Gol</h4>
+          <p>Uma trave pequena e uma bolinha no restaurante. O cliente tem 3 tentativas: chute normal, de olho vendado e de costas. Acertou qualquer uma — ganhou!</p>
+        </div>
+        <div class="copa-premio">
+          <span class="premio-label">Prêmio</span>
+          <span class="premio-val">Aperitivo<br>ou Cerveja<br>grátis</span>
+        </div>
+      </div>
+
+      <div class="copa-card desafio-cab fade-up d1">
+        <div class="copa-num">02</div>
+        <div class="copa-body">
+          <h4>🤸 Desafio da Cabeçada</h4>
+          <p>Marcar na parede a altura de um craque famoso. O cliente pula e tenta tocar com a cabeça. Difícil pra caramba — mas quem conseguir merece o prêmio!</p>
+        </div>
+        <div class="copa-premio">
+          <span class="premio-label">Prêmio</span>
+          <span class="premio-val">Parrilla<br>ou prêmio<br>especial</span>
+        </div>
+      </div>
+
+      <div class="copa-card figurinhas fade-up d2">
+        <div class="copa-num">03</div>
+        <div class="copa-body">
+          <h4>🃏 Mesa de Figurinhas</h4>
+          <p>Mesa aberta antes de cada jogo do Brasil para os clientes se reunirem, trocarem figurinhas repetidas da Copa e interagirem entre si. Puro clima de torcida!</p>
+        </div>
+        <div class="copa-premio">
+          <span class="premio-label">Timing</span>
+          <span class="premio-val">Pré-jogo<br>do Brasil</span>
+        </div>
+      </div>
+
+      <div class="copa-card clube fade-up d3">
+        <div class="copa-num">04</div>
+        <div class="copa-body">
+          <h4>🏅 Clube de Fidelidade da Copa</h4>
+          <p>Cartãozinho especial. Cada jogo do Brasil assistido no Cabana = 1 carimbo. Quem completar os 3 primeiros jogos ganha nos próximos — enquanto o Brasil estiver na Copa!</p>
+          <div class="clube-grid">
+            <div class="clube-step">
+              <div class="step-n">1°</div>
+              <div class="step-txt">Jogo do<br>Brasil</div>
+            </div>
+            <div class="clube-step">
+              <div class="step-n">2°</div>
+              <div class="step-txt">Jogo do<br>Brasil</div>
+            </div>
+            <div class="clube-step" style="background:rgba(232,184,75,0.15); border:1px solid rgba(232,184,75,0.3)">
+              <div class="step-n">3°</div>
+              <div class="step-txt" style="color:var(--ouro)">🎁 Ganha<br>caipirinha!</div>
+            </div>
+          </div>
+        </div>
+        <div class="copa-premio">
+          <span class="premio-label">Prêmio</span>
+          <span class="premio-val">Caipirinha<br>grátis nos<br>próx. jogos</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="scroll-down">↓</div>
+</section>
+
+<!-- ═══ RESUMO ═══ -->
+<section id="resumo">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <div class="section-eyebrow">Visão Consolidada</div>
+    <h2 class="section-title">Resumo<br><em>Geral</em></h2>
+
+    <div class="resumo-grid">
+      <div class="resumo-col fade-up d1">
+        <h4 class="amor">💕 Namorados · 12/06</h4>
+        <ul>
+          <li>Mesas limitadas — reserva antecipada</li>
+          <li>3 combos: Essencial, Romântico, Premium</li>
+          <li>Velas, flores e sobremesa especial</li>
+          <li>Petit gateau + pratinho coração</li>
+          <li>Música ao vivo romântica</li>
+          <li>Divulgação a partir de 01/06</li>
+        </ul>
+      </div>
+      <div class="resumo-col fade-up d2">
+        <h4 class="sj">🎉 São João · 24/06</h4>
+        <ul>
+          <li>Drink de milho a cada R$ 200</li>
+          <li>Música ao vivo (forró, brasileira)</li>
+          <li>Pintura para crianças</li>
+          <li>Decoração junina completa</li>
+          <li>Sobremesa: Cocada</li>
+          <li>Painel de fotos com adereços</li>
+        </ul>
+      </div>
+      <div class="resumo-col fade-up d3">
+        <h4 class="copa">⚽ Copa · 11–30/06</h4>
+        <ul>
+          <li>Desafio do Gol → aperitivo/cerveja</li>
+          <li>Desafio da Cabeçada → parrilla</li>
+          <li>Mesa de figurinhas pré-jogo Brasil</li>
+          <li>Clube de Fidelidade: 3 jogos → caipirinha</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="proximos fade-up d2">
+      <h4>✅ Próximos Passos</h4>
+      <ul>
+        <li>Definir preços finais dos combos de namorados</li>
+        <li>Fechar fornecedor das rosas e pratinhos coração</li>
+        <li>Produzir os cartõezinhos do clube de fidelidade</li>
+        <li>Comprar trave e bolinha para o desafio</li>
+        <li>Definir prêmio exato do desafio da cabeçada</li>
+        <li>Planejar decoração junina</li>
+        <li>Contratar música ao vivo para as duas datas</li>
+        <li>Montar calendário de posts no Instagram</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CALENDÁRIO EDITORIAL ═══ -->
+<section id="editorial" style="min-height:auto; padding: 60px 48px 80px;">
+  <div class="lights"></div>
+  <div class="fade-up">
+    <div class="section-eyebrow">Instagram · Junho 2026</div>
+    <h2 class="section-title">Calendário<br><em>Editorial</em></h2>
+
+    <!-- LEGENDA + CALENDÁRIO VISUAL -->
+    <div class="cal-visual-wrap fade-up d1">
+      <div class="cal-legenda">
+        <div class="leg-item nam"><span class="leg-dot"></span>Namorados</div>
+        <div class="leg-item sj"><span class="leg-dot"></span>São João</div>
+        <div class="leg-item copa"><span class="leg-dot"></span>Copa</div>
+        <div class="leg-item duplo"><span class="leg-dot"></span>Duplo</div>
+      </div>
+
+      <!-- CALENDÁRIO GRANDE -->
+      <div class="cal-big">
+        <div class="cal-big-header">
+          <span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span>
+        </div>
+        <div class="cal-big-body">
+
+          <!-- linha 1 -->
+          <div class="cb-outer">
+          <div class="cb vazio"></div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb sj active" onclick="showPost(this)">
+            <div class="cb-num">1</div>
+            <div class="cb-num">1</div>
+
+            <div class="cb-icon">🎉</div>
+            <div class="cb-title">Quadrilha do Happy Hour</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb nam active" onclick="showPost(this)">
+            <div class="cb-num">2</div>
+            <div class="cb-num">2</div>
+
+            <div class="cb-icon">💕</div>
+            <div class="cb-title">"Eu mal posso esperar..."</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb sj active" onclick="showPost(this)">
+            <div class="cb-num">3</div>
+            <div class="cb-num">3</div>
+
+            <div class="cb-icon">🎉</div>
+            <div class="cb-title">Adereços na comida</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb nam active" onclick="showPost(this)">
+            <div class="cb-num">4</div>
+            <div class="cb-num">4</div>
+
+            <div class="cb-icon">💕</div>
+            <div class="cb-title">Clientes casais</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb sj active" onclick="showPost(this)">
+            <div class="cb-num">5</div>
+            <div class="cb-num">5</div>
+
+            <div class="cb-icon">🎉</div>
+            <div class="cb-title">Decoração e vibe</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb nam active" onclick="showPost(this)">
+            <div class="cb-num">6</div>
+            <div class="cb-num">6</div>
+
+            <div class="cb-icon">💕</div>
+            <div class="cb-title">5 motivos no Cabana</div>
+            <div class="cb-fmt">Carrossel</div>
+          </div>
+          </div>
+
+          <!-- linha 2 -->
+          <div class="cb-outer">
+          <div class="cb nam active" onclick="showPost(this)">
+            <div class="cb-num">7</div>
+            <div class="cb-num">7</div>
+
+            <div class="cb-icon">💕</div>
+            <div class="cb-title">Marcos & Débora</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb livre">
+            <div class="cb-num">8</div>
+            <div class="cb-num">8</div>
+
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb nam active destaque" onclick="showPost(this)">
+            <div class="cb-num">9</div>
+            <div class="cb-num">9</div>
+
+            <div class="cb-icon">💕</div>
+            <div class="cb-title">Combos & Reservas</div>
+            <div class="cb-fmt">Reel + Carrossel + Fotos</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb copa active" onclick="showPost(this)">
+            <div class="cb-num">10</div>
+            <div class="cb-num">10</div>
+
+            <div class="cb-icon">⚽</div>
+            <div class="cb-title">Produtos como ícones da Copa</div>
+            <div class="cb-fmt">Carrossel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb nam active" onclick="showPost(this)">
+            <div class="cb-num">11</div>
+            <div class="cb-num">11</div>
+
+            <div class="cb-icon">💕</div>
+            <div class="cb-title">3 sinais do casamento</div>
+            <div class="cb-fmt">Carrossel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb nam active destaque" onclick="showPost(this)">
+            <div class="cb-num">12</div>
+            <div class="cb-num">12</div>
+
+            <div class="cb-icon">🎬</div>
+            <div class="cb-title">Cinemático casais</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb copa active destaque jogo" onclick="showPost(this)">
+            <div class="cb-num">13</div>
+            <div class="cb-num">13</div>
+
+            <div class="cb-icon">⚽</div>
+            <div class="cb-jogo-badge">🇧🇷 Jogo</div>
+            <div class="cb-title">Cobertura + Desafio da Trave</div>
+            <div class="cb-fmt">Reel + Stories</div>
+          </div>
+          </div>
+
+          <!-- linha 3 -->
+          <div class="cb-outer">
+          <div class="cb livre">
+            <div class="cb-num">14</div>
+            <div class="cb-num">14</div>
+
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb copa active" onclick="showPost(this)">
+            <div class="cb-num">15</div>
+            <div class="cb-num">15</div>
+
+            <div class="cb-icon">⚽</div>
+            <div class="cb-title">Se o jogador X... (1ª ed.)</div>
+            <div class="cb-fmt">Carrossel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb livre">
+            <div class="cb-num">16</div>
+            <div class="cb-num">16</div>
+
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb copa active destaque jogo" onclick="showPost(this)">
+            <div class="cb-num">17</div>
+            <div class="cb-num">17</div>
+
+            <div class="cb-icon">🤸</div>
+            <div class="cb-title">Desafio da Cabeçada</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb copa active" onclick="showPost(this)">
+            <div class="cb-num">18</div>
+            <div class="cb-num">18</div>
+
+            <div class="cb-icon">⚽</div>
+            <div class="cb-title">Bolão pré-jogo</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb copa active destaque jogo" onclick="showPost(this)">
+            <div class="cb-num">19</div>
+            <div class="cb-num">19</div>
+
+            <div class="cb-icon">⚽</div>
+            <div class="cb-jogo-badge">🇧🇷 Jogo</div>
+            <div class="cb-title">Cobertura do jogo</div>
+            <div class="cb-fmt">Reel + Stories</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb sj active" onclick="showPost(this)">
+            <div class="cb-num">20</div>
+            <div class="cb-num">20</div>
+
+            <div class="cb-icon">🌽</div>
+            <div class="cb-title">Drink de milho</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+
+          <!-- linha 4 -->
+          <div class="cb-outer">
+          <div class="cb copa active" onclick="showPost(this)">
+            <div class="cb-num">21</div>
+            <div class="cb-num">21</div>
+
+            <div class="cb-icon">⚽</div>
+            <div class="cb-title">Se o jogador X... (2ª ed.)</div>
+            <div class="cb-fmt">Carrossel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb livre">
+            <div class="cb-num">22</div>
+            <div class="cb-num">22</div>
+
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb sj active" onclick="showPost(this)">
+            <div class="cb-num">23</div>
+            <div class="cb-num">23</div>
+
+            <div class="cb-icon">🎉</div>
+            <div class="cb-title">Chamada direta São João</div>
+            <div class="cb-fmt">Reel</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb duplo active destaque jogo" onclick="showPost(this)">
+            <div class="cb-num">24</div>
+            <div class="cb-num">24</div>
+
+            <div class="cb-icon">🎊</div>
+            <div class="cb-jogo-badge">🇧🇷 Jogo</div>
+            <div class="cb-title">Copa + São João</div>
+            <div class="cb-fmt">Reel + Stories</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb aberto" onclick="showPost(this)">
+            <div class="cb-num">25</div>
+            <div class="cb-num">25</div>
+
+            <div class="cb-title">Em aberto</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb aberto" onclick="showPost(this)">
+            <div class="cb-num">26</div>
+            <div class="cb-num">26</div>
+
+            <div class="cb-title">Em aberto</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb aberto" onclick="showPost(this)">
+            <div class="cb-num">27</div>
+            <div class="cb-num">27</div>
+
+            <div class="cb-title">Em aberto</div>
+          </div>
+          </div>
+
+          <!-- linha 5 -->
+          <div class="cb-outer">
+          <div class="cb aberto" onclick="showPost(this)">
+            <div class="cb-num">28</div>
+            <div class="cb-num">28</div>
+
+            <div class="cb-title">Em aberto</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb aberto" onclick="showPost(this)">
+            <div class="cb-num">29</div>
+            <div class="cb-num">29</div>
+
+            <div class="cb-title">Em aberto</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb aberto" onclick="showPost(this)">
+            <div class="cb-num">30</div>
+            <div class="cb-num">30</div>
+
+            <div class="cb-title">Em aberto</div>
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb livre">
+            <div class="cb-num">31</div>
+            <div class="cb-num">31</div>
+
+          </div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb vazio"></div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb vazio"></div>
+          </div>
+          <div class="cb-outer">
+          <div class="cb vazio"></div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <!-- PAINEL DE DETALHES -->
+      <div class="cal-detalhe" id="calDetalhe">
+        <div class="cal-detalhe-inner">
+          <span class="cal-detalhe-close" onclick="closePost()">✕</span>
+          <div id="calDetalheIcon" class="cal-det-icon"></div>
+          <div id="calDetalheDia" class="cal-det-dia"></div>
+          <div id="calDetalheTitle" class="cal-det-title"></div>
+          <div id="calDetalheTheme" class="cal-det-theme"></div>
+          <div id="calDetalheFmt" class="cal-det-fmt"></div>
+        </div>
+      </div>
+
+    </div><!-- cal-visual-wrap -->
+
+    <!-- LISTA DE CONTEÚDOS -->
+    <div class="section-eyebrow" style="margin-top:52px; margin-bottom:20px">Detalhamento · Post a post</div>
+    <div class="cal-ed-grid">
+
+      <div class="cal-ed-card sj fade-up d1"><div class="cal-ed-day">01</div><div class="cal-ed-body"><div class="cal-ed-tag sj">🎉 São João</div><div class="cal-ed-title">Quadrilha do Happy Hour</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card nam fade-up d1"><div class="cal-ed-day">02</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">"Eu mal posso esperar..." → Combos como solução</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card sj fade-up d2"><div class="cal-ed-day">03</div><div class="cal-ed-body"><div class="cal-ed-tag sj">🎉 São João</div><div class="cal-ed-title">Adereços na comida — trend (chapéu, bandeirinha)</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card nam fade-up d2"><div class="cal-ed-day">04</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">Clientes casais — prova social</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card sj fade-up d1"><div class="cal-ed-day">05</div><div class="cal-ed-body"><div class="cal-ed-tag sj">🎉 São João</div><div class="cal-ed-title">Decoração e vibe junina</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card nam fade-up d1"><div class="cal-ed-day">06</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">5 motivos pra comemorar no Cabana</div><div class="cal-ed-format">Carrossel</div></div></div>
+      <div class="cal-ed-card nam fade-up d2"><div class="cal-ed-day">07</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">História de amor — Seu Marcos e Dona Débora</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card nam destaque fade-up d1"><div class="cal-ed-day">09</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">Combos e reservas — exclusivo, tempo limitado</div><div class="cal-ed-format">Reel + Carrossel + Fotos</div></div></div>
+      <div class="cal-ed-card copa fade-up d2"><div class="cal-ed-day">10</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa</div><div class="cal-ed-title">Produtos do Cabana como ícones da Copa</div><div class="cal-ed-format">Carrossel</div></div></div>
+      <div class="cal-ed-card nam fade-up d1"><div class="cal-ed-day">11</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">3 sinais que seu casamento precisa de atenção + solução</div><div class="cal-ed-format">Carrossel</div></div></div>
+      <div class="cal-ed-card nam fade-up d2"><div class="cal-ed-day">12</div><div class="cal-ed-body"><div class="cal-ed-tag nam">💕 Namorados</div><div class="cal-ed-title">Cinemático casais 🎬</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card copa destaque fade-up d1"><div class="cal-ed-day">13</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa · Jogo Brasil 🇧🇷</div><div class="cal-ed-title">Cobertura do jogo + Desafio da Trave</div><div class="cal-ed-format">Reel + Stories</div></div></div>
+      <div class="cal-ed-card copa fade-up d2"><div class="cal-ed-day">15</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa</div><div class="cal-ed-title">"Se o jogador X viesse no Cabana..." — 1ª ed.</div><div class="cal-ed-format">Carrossel</div></div></div>
+      <div class="cal-ed-card copa fade-up d1"><div class="cal-ed-day">17</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa</div><div class="cal-ed-title">Desafio da Cabeçada</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card copa fade-up d2"><div class="cal-ed-day">18</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa</div><div class="cal-ed-title">Bolão pré-jogo — quem acerta o placar?</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card copa destaque fade-up d1"><div class="cal-ed-day">19</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa · Jogo Brasil 🇧🇷</div><div class="cal-ed-title">Cobertura do jogo</div><div class="cal-ed-format">Reel + Stories</div></div></div>
+      <div class="cal-ed-card sj fade-up d2"><div class="cal-ed-day">20</div><div class="cal-ed-body"><div class="cal-ed-tag sj">🎉 São João</div><div class="cal-ed-title">Clientes provando o drink de milho</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card copa fade-up d1"><div class="cal-ed-day">21</div><div class="cal-ed-body"><div class="cal-ed-tag copa">⚽ Copa</div><div class="cal-ed-title">"Se o jogador X viesse no Cabana..." — 2ª ed.</div><div class="cal-ed-format">Carrossel</div></div></div>
+      <div class="cal-ed-card sj fade-up d2"><div class="cal-ed-day">23</div><div class="cal-ed-body"><div class="cal-ed-tag sj">🎉 São João</div><div class="cal-ed-title">Chamada direta — colaborador sendo montado pro São João</div><div class="cal-ed-format">Reel</div></div></div>
+      <div class="cal-ed-card duplo destaque fade-up d1"><div class="cal-ed-day">24</div><div class="cal-ed-body"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px"><div class="cal-ed-tag copa">⚽ Copa · Jogo Brasil 🇧🇷</div><div class="cal-ed-tag sj">🎉 São João</div></div><div class="cal-ed-title">Cobertura noite do São João + Jogo do Brasil</div><div class="cal-ed-format">Reel + Stories</div></div></div>
+      <div class="cal-ed-card aberto fade-up d2"><div class="cal-ed-day" style="font-size:28px">25–31</div><div class="cal-ed-body"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px"><div class="cal-ed-tag copa">⚽ Copa</div><div class="cal-ed-tag sj">🎉 São João</div></div><div class="cal-ed-title">Em aberto — Copa se o Brasil continuar, São João se não</div><div class="cal-ed-format" style="color:rgba(245,236,215,0.3)">A definir</div></div></div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .cal-ed-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; max-width: 900px;
+  }
+  .cal-ed-card {
+    border-radius: 12px; padding: 16px 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: transform 0.3s; border: 1px solid transparent;
+  }
+  .cal-ed-card:hover { transform: translateY(-2px); }
+  .cal-ed-card.nam { background: rgba(196,96,122,0.08); border-color: rgba(196,96,122,0.2); }
+  .cal-ed-card.sj { background: rgba(74,124,47,0.08); border-color: rgba(74,124,47,0.2); }
+  .cal-ed-card.copa { background: rgba(232,184,75,0.07); border-color: rgba(232,184,75,0.2); }
+  .cal-ed-card.duplo { background: linear-gradient(135deg, rgba(232,184,75,0.08), rgba(74,124,47,0.08)); border-color: rgba(232,184,75,0.25); grid-column: span 2; }
+  .cal-ed-card.aberto { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.07); border-style: dashed; }
+  .cal-ed-card.nam.destaque { border-color: rgba(196,96,122,0.45); }
+  .cal-ed-card.copa.destaque { border-color: rgba(232,184,75,0.5); background: rgba(232,184,75,0.1); }
+  .cal-ed-day { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; line-height: 1; color: var(--ouro); opacity: 0.3; min-width: 36px; flex-shrink: 0; }
+  .cal-ed-body { flex: 1; }
+  .cal-ed-tag { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; padding: 2px 8px; border-radius: 3px; }
+  .cal-ed-tag.nam { color: #E08090; background: rgba(196,96,122,0.12); }
+  .cal-ed-tag.sj { color: #90C870; background: rgba(74,124,47,0.15); }
+  .cal-ed-tag.copa { color: var(--ouro); background: rgba(232,184,75,0.1); }
+  .cal-ed-title { font-size: 12px; line-height: 1.5; opacity: 0.8; margin-bottom: 4px; }
+  .cal-ed-format { font-size: 10px; letter-spacing: 1px; opacity: 0.35; text-transform: uppercase; }
+  @media (max-width: 640px) {
+    .cal-ed-grid { grid-template-columns: 1fr; }
+    .cal-ed-card.duplo { grid-column: span 1; }
+  }
+</style>
+
+<style>
+  /* ═══ CALENDÁRIO VISUAL ═══ */
+  #editorial { background: #080400; }
+
+  .cal-legenda {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .leg-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 6px;
+  }
+  .leg-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .leg-item.nam { background: rgba(196,96,122,0.15); color: #E08090; border: 1px solid rgba(196,96,122,0.3); }
+  .leg-item.nam .leg-dot { background: #C4607A; }
+  .leg-item.sj { background: rgba(74,124,47,0.15); color: #90C870; border: 1px solid rgba(74,124,47,0.3); }
+  .leg-item.sj .leg-dot { background: #4A7C2F; }
+  .leg-item.copa { background: rgba(232,184,75,0.12); color: var(--ouro); border: 1px solid rgba(232,184,75,0.3); }
+  .leg-item.copa .leg-dot { background: #E8B84B; }
+  .leg-item.duplo { background: rgba(255,255,255,0.05); color: var(--creme); border: 1px solid rgba(255,255,255,0.12); }
+  .leg-item.duplo .leg-dot { background: linear-gradient(135deg, #E8B84B, #4A7C2F); }
+
+  .cal-big { width: 100%; max-width: 980px; }
+
+  .cal-big-header {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+  }
+  .cal-big-header span {
+    text-align: center; padding: 8px 4px;
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.25; font-weight: 700;
+  }
+
+  .cal-big-body {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+
+  /* wrapper que força quadrado */
+  .cb-outer {
+    position: relative; width: 100%;
+  }
+  .cb-outer::before {
+    content: ''; display: block; padding-top: 100%;
+  }
+
+  .cb {
+    position: absolute; inset: 0;
+    border-radius: 10px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+  }
+
+  .cb.active { cursor: pointer; }
+  .cb.active:hover { transform: scale(1.04); z-index: 5; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+
+  .cb.vazio { background: transparent; }
+  .cb.livre {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .cb.nam {
+    background: linear-gradient(160deg, rgba(196,96,122,0.35), rgba(139,40,60,0.25));
+    border: 1px solid rgba(196,96,122,0.4);
+  }
+  .cb.sj {
+    background: linear-gradient(160deg, rgba(74,124,47,0.35), rgba(40,80,20,0.25));
+    border: 1px solid rgba(74,124,47,0.4);
+  }
+  .cb.copa {
+    background: linear-gradient(160deg, rgba(232,184,75,0.25), rgba(180,120,20,0.2));
+    border: 1px solid rgba(232,184,75,0.35);
+  }
+  .cb.duplo {
+    background: linear-gradient(135deg, rgba(232,184,75,0.28), rgba(74,124,47,0.28));
+    border: 1px solid rgba(232,184,75,0.4);
+  }
+  .cb.aberto {
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.12);
+  }
+
+  .cb.destaque { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.2); }
+  .cb.nam.destaque { box-shadow: 0 0 0 2px rgba(196,96,122,0.7); }
+  .cb.copa.destaque { box-shadow: 0 0 0 2px rgba(232,184,75,0.7); }
+  .cb.duplo.destaque { box-shadow: 0 0 0 2px rgba(255,255,255,0.4); }
+
+  .cb-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 900; line-height: 1;
+    color: rgba(245,236,215,0.9);
+  }
+  .cb.livre .cb-num, .cb.aberto .cb-num { opacity: 0.2; }
+
+  .cb-icon { font-size: 18px; margin-top: 6px; line-height: 1; }
+
+  .cb-jogo-badge {
+    display: inline-block; margin-top: 4px;
+    background: rgba(255,255,255,0.15); border-radius: 3px;
+    padding: 1px 5px; font-size: 8px; font-weight: 700;
+    letter-spacing: 1px; color: white; text-transform: uppercase;
+    width: fit-content;
+  }
+
+  /* Esconde título e formato na célula — aparece só no popup */
+  .cb-title { display: none; }
+  .cb-fmt { display: none; }
+
+  /* PAINEL DE DETALHE */
+  .cal-detalhe {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(10,5,0,0.85); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .cal-detalhe.open { opacity: 1; pointer-events: all; }
+
+  .cal-detalhe-inner {
+    background: var(--madeira);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 40px 44px;
+    max-width: 420px; width: 90%;
+    text-align: center; position: relative;
+  }
+  .cal-detalhe-close {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 16px; opacity: 0.35; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .cal-detalhe-close:hover { opacity: 1; }
+
+  .cal-det-icon { font-size: 48px; margin-bottom: 12px; }
+  .cal-det-dia {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    opacity: 0.35; margin-bottom: 10px;
+  }
+  .cal-det-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-style: italic; line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .cal-det-theme {
+    display: inline-block; border-radius: 6px;
+    padding: 5px 16px; font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .cal-det-fmt {
+    font-size: 12px; opacity: 0.5; letter-spacing: 1px;
+  }
+
+  /* CALENDÁRIO EDITORIAL (cards detalhados removidos) */
+  .cal-visual-wrap { max-width: 100%; }
+</style>
+  #editorial { background: #0A0500; min-height: auto; padding: 60px 48px 80px; }
+
+  .cal-ed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 900px;
+  }
+
+  .cal-ed-card {
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: transform 0.25s;
+    border: 1px solid transparent;
+  }
+  .cal-ed-card:hover { transform: translateY(-2px); }
+
+  .cal-ed-card.nam {
+    background: rgba(196,96,122,0.08);
+    border-color: rgba(196,96,122,0.2);
+  }
+  .cal-ed-card.sj {
+    background: rgba(74,124,47,0.08);
+    border-color: rgba(74,124,47,0.2);
+  }
+  .cal-ed-card.copa {
+    background: rgba(232,184,75,0.07);
+    border-color: rgba(232,184,75,0.2);
+  }
+  .cal-ed-card.duplo {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(232,184,75,0.08), rgba(74,124,47,0.08));
+    border-color: rgba(232,184,75,0.25);
+  }
+  .cal-ed-card.aberto {
+    grid-column: span 1;
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.07);
+    border-style: dashed;
+  }
+  .cal-ed-card.destaque { border-width: 1.5px; }
+  .cal-ed-card.nam.destaque { border-color: rgba(196,96,122,0.45); }
+  .cal-ed-card.copa.destaque { border-color: rgba(232,184,75,0.5); background: rgba(232,184,75,0.1); }
+
+  .cal-ed-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 900; line-height: 1;
+    color: var(--ouro); opacity: 0.3;
+    min-width: 36px; flex-shrink: 0;
+  }
+
+  .cal-ed-body { flex: 1; }
+
+  .cal-ed-tag {
+    display: inline-block;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 5px;
+    padding: 2px 8px; border-radius: 3px;
+  }
+  .cal-ed-tag.nam { color: #E08090; background: rgba(196,96,122,0.12); }
+  .cal-ed-tag.sj { color: #90C870; background: rgba(74,124,47,0.15); }
+  .cal-ed-tag.copa { color: var(--ouro); background: rgba(232,184,75,0.1); }
+
+  .cal-ed-title {
+    font-size: 12px; line-height: 1.5;
+    opacity: 0.8; margin-bottom: 6px;
+  }
+
+  .cal-ed-format {
+    font-size: 10px; letter-spacing: 1px;
+    opacity: 0.35; text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .cal-ed-grid { grid-template-columns: 1fr; }
+    .cal-ed-card.duplo { grid-column: span 1; }
+  }
+</style>
+
+<script>
+  // Popup calendário
+  const themes = {
+    nam: { label: '💕 Namorados', color: '#E08090', bg: 'rgba(196,96,122,0.2)' },
+    sj:  { label: '🎉 São João',  color: '#90C870', bg: 'rgba(74,124,47,0.2)' },
+    copa:{ label: '⚽ Copa',       color: '#E8B84B', bg: 'rgba(232,184,75,0.15)' },
+    duplo:{ label: '⚽🎉 Copa + São João', color: '#F5ECD7', bg: 'rgba(255,255,255,0.08)' },
+    aberto:{ label: '— Em aberto', color: 'rgba(245,236,215,0.4)', bg: 'rgba(255,255,255,0.04)' },
+  };
+
+  function showPost(el) {
+    const num = el.querySelector('.cb-num')?.textContent;
+    const icon = el.querySelector('.cb-icon')?.textContent || '📅';
+    const title = el.querySelector('.cb-title')?.textContent;
+    const fmt = el.querySelector('.cb-fmt')?.textContent || '';
+    const type = ['nam','sj','copa','duplo','aberto'].find(t => el.classList.contains(t)) || 'aberto';
+    const theme = themes[type];
+
+    document.getElementById('calDetalheIcon').textContent = icon;
+    document.getElementById('calDetalheDia').textContent = 'Junho · Dia ' + num;
+    document.getElementById('calDetalheTitle').textContent = title;
+    const themeEl = document.getElementById('calDetalheTheme');
+    themeEl.textContent = theme.label;
+    themeEl.style.background = theme.bg;
+    themeEl.style.color = theme.color;
+    themeEl.style.border = '1px solid ' + theme.color + '44';
+    document.getElementById('calDetalheFmt').textContent = fmt ? '📱 ' + fmt : '';
+
+    document.getElementById('calDetalhe').classList.add('open');
+  }
+
+  function closePost() {
+    document.getElementById('calDetalhe').classList.remove('open');
+  }
+  document.getElementById('calDetalhe').addEventListener('click', function(e) {
+    if (e.target === this) closePost();
+  });
+
+  function scrollTo(id) {
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => obs.observe(el));
+
+  const sections = document.querySelectorAll('section');
+  const dots = document.querySelectorAll('.nav-dot');
+  const dotObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = Array.from(sections).indexOf(e.target);
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[idx]) dots[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => dotObs.observe(s));
+</script>
+</body>
+</html>
